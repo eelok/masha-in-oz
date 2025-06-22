@@ -39,7 +39,7 @@ layout: layouts/base.njk
             </span>
             {% for langCode, langData in site.languages %}
                 {% if langCode != lang %}
-                    <a href="/{{ langCode }}{{ page.url | replace('/en/', '/') | replace('/ru/', '/') | replace('/de/', '/') }}" 
+                    <a href="/{{ langCode | url }}{{ page.url | replace('/en/', '/') | replace('/ru/', '/') | replace('/de/', '/') }}" 
                        class="lang-link">
                         {{ langData.flag }} {{ langData.name }}
                     </a>
