@@ -1,0 +1,98 @@
+# Deploy multilingual blog to GitHub Pages
+#
+# This workflow builds the Eleventy site with Sass preprocessing
+# and deploys it to GitHub Pages when changes are pushed to main branch.
+#
+# Requirements:
+# - Repository Settings > Pages > Source should be set to "GitHub Actions"
+# - Repository must have Pages enabled
+#
+name: Deploy to GitHub Pages
+
+on:
+  # Trigger deployment on push to main branch
+  push:
+    branches: [ "main" ]
+  
+  # Allow manual triggering from Actions tab
+  workflow_dispatch:
+
+# Set permissions for GitHub Pages deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Ensure only one deployment runs at a time
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Build job
+  build:
+    name: Build site
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # Fetch full history for git-based features
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: |
+          npm ci
+          echo "✅ Dependencies installed successfully"
+      
+      - name: Setup Pages configuration
+        uses: actions/configure-pages@v4
+        
+      - name: Build site
+        run: |
+          echo "🔨 Building Eleventy site with Sass preprocessing..."
+          npm run build
+          echo "✅ Site built successfully"
+        env:
+          # Set NODE_ENV for production optimizations
+          NODE_ENV: production
+      
+      - name: Verify build output
+        run: |
+          echo "📋 Build verification:"
+          ls -la _site/
+          echo "📊 Site size:"
+          du -sh _site/
+          echo "📁 Directory structure:"
+          find _site -type f -name "*.html" | head -10
+      
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site/
+
+  # Deploy job - runs after build completes successfully
+  deploy:
+    name: Deploy to Pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        
+      - name: Display deployment URL
+        run: |
+          echo "🚀 Site deployed successfully!"
+          echo "📍 URL: ${{ steps.deployment.outputs.page_url }}"

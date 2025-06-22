@@ -1,0 +1,99 @@
+# Test build for pull requests
+#
+# This workflow runs on pull requests to ensure the site builds
+# successfully before merging to main branch.
+#
+name: Test Build
+
+on:
+  # Run on pull requests targeting main branch
+  pull_request:
+    branches: [ "main" ]
+  
+  # Allow manual triggering from Actions tab
+  workflow_dispatch:
+
+# Standard permissions for testing
+permissions:
+  contents: read
+
+jobs:
+  # Test build job
+  test-build:
+    name: Test build
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: |
+          npm ci
+          echo "✅ Dependencies installed successfully"
+      
+      - name: Lint and validate configuration
+        run: |
+          echo "🔍 Validating package.json..."
+          npm run --silent || echo "No test script defined"
+          
+          echo "🔍 Checking for common issues..."
+          # Check if required files exist
+          test -f .eleventy.js || (echo "❌ .eleventy.js not found" && exit 1)
+          test -f package.json || (echo "❌ package.json not found" && exit 1)
+          
+          echo "✅ Configuration validation passed"
+      
+      - name: Test build
+        run: |
+          echo "🔨 Testing Eleventy build with Sass preprocessing..."
+          npm run build
+          echo "✅ Test build completed successfully"
+        env:
+          NODE_ENV: test
+      
+      - name: Verify build artifacts
+        run: |
+          echo "📋 Build verification:"
+          
+          # Check if _site directory was created
+          test -d _site || (echo "❌ _site directory not created" && exit 1)
+          
+          # Check if index.html exists
+          test -f _site/index.html || (echo "❌ index.html not found in _site" && exit 1)
+          
+          # Check if CSS was compiled
+          find _site -name "*.css" | grep -q . || (echo "❌ No CSS files found in build" && exit 1)
+          
+          echo "📊 Site structure:"
+          ls -la _site/
+          
+          echo "📁 HTML files:"
+          find _site -name "*.html" | head -10
+          
+          echo "🎨 CSS files:"
+          find _site -name "*.css"
+          
+          echo "✅ All build artifacts verified successfully"
+      
+      - name: Check for broken internal links (basic)
+        run: |
+          echo "🔗 Basic link validation..."
+          # Simple check for common issues in HTML files
+          if find _site -name "*.html" -exec grep -l 'href=""' {} \; | head -1; then
+            echo "⚠️  Found empty href attributes"
+          fi
+          
+          if find _site -name "*.html" -exec grep -l 'src=""' {} \; | head -1; then
+            echo "⚠️  Found empty src attributes"
+          fi
+          
+          echo "✅ Basic link validation completed"
