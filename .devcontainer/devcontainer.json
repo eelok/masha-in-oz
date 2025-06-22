@@ -12,7 +12,8 @@
         "formulahendry.auto-rename-tag",
         "christian-kohler.path-intellisense",
         "ms-vscode.vscode-json",
-        "yzhang.markdown-all-in-one"
+        "yzhang.markdown-all-in-one",
+        "github.vscode-github-actions"
       ],
       "settings": {
         "editor.formatOnSave": true,
