@@ -37,7 +37,8 @@
                         {% for langCode, langData in site.languages %}
                             <a href="/{{ langCode }}/" 
                                class="nav-lang-link {% if lang == langCode %}active{% endif %}"
-                               title="{{ langData.name }}">
+                               title="{{ langData.name }}"
+                               data-language="{{ langCode }}">
                                 {{ langData.flag }} {{ langData.name }}
                             </a>
                         {% endfor %}
@@ -51,7 +52,8 @@
             {% for langCode, langData in site.languages %}
                 <a href="/{{ langCode }}/" 
                    class="lang-switch {% if lang == langCode %}active{% endif %}"
-                   title="{{ langData.name }}">
+                   title="{{ langData.name }}"
+                   data-language="{{ langCode }}">
                     {{ langData.flag }}
                 </a>
             {% endfor %}

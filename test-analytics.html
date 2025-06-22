@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2rem; }
+        .test-section { margin: 2rem 0; padding: 1rem; border: 1px solid #ccc; }
+        button { margin: 0.5rem; padding: 0.5rem 1rem; }
+        .log { background: #f5f5f5; padding: 1rem; margin: 1rem 0; }
+    </style>
+</head>
+<body>
+    <h1>Analytics Service Test Page</h1>
+    
+    <div class="test-section">
+        <h2>Analytics Service Status</h2>
+        <div id="status">Loading...</div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test Actions</h2>
+        <button onclick="testShowConsent()">Show Consent Banner</button>
+        <button onclick="testTrackEvent()">Track Test Event</button>
+        <button onclick="testLanguageSwitch()">Test Language Switch</button>
+        <button onclick="testGetConsentStatus()">Get Consent Status</button>
+        <button onclick="testRevokeConsent()">Revoke Consent</button>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test Links</h2>
+        <a href="https://google.com" target="_blank">External Link (should track)</a><br>
+        <a href="/test.pdf">PDF Download (should track)</a><br>
+        <a href="#" data-language="ru">Language Switch to Russian</a><br>
+        <a href="#" data-language="de">Language Switch to German</a>
+    </div>
+    
+    <div class="test-section">
+        <h2>Console Log</h2>
+        <div id="log" class="log"></div>
+    </div>
+
+    <!-- Include analytics service -->
+    <script>
+        // Mock site configuration
+        window.siteConsent = {
+            en: {
+                title: "Cookie Consent",
+                message: "We use cookies to analyze site usage and improve your experience.",
+                accept: "Accept All",
+                reject: "Reject All",
+                customize: "Customize",
+                necessary: "Necessary",
+                analytics: "Analytics",
+                marketing: "Marketing",
+                privacyPolicy: "Privacy Policy",
+                description: {
+                    necessary: "Essential cookies required for basic site functionality.",
+                    analytics: "Help us understand how visitors interact with our website.",
+                    marketing: "Used to track visitors across websites for advertising purposes."
+                }
+            }
+        };
+        
+        const mockAnalyticsConfig = {
+            googleAnalytics: {
+                measurementId: "G-TEST123456",
+                development: null,
+                production: null
+            },
+            privacy: {
+                requireConsent: true,
+                consentExpiryDays: 365,
+                anonymizeIp: true,
+                respectDoNotTrack: true,
+                cookielessTracking: false,
+                storageType: 'cookies'
+            },
+            events: {
+                trackLanguageSwitch: true,
+                trackScrollDepth: true,
+                trackOutboundLinks: true,
+                trackDownloads: true
+            }
+        };
+
+        // Override console.log to capture output
+        const originalLog = console.log;
+        const logElement = document.getElementById('log');
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            const logEntry = args.join(' ') + '\n';
+            logElement.textContent += logEntry;
+            logElement.scrollTop = logElement.scrollHeight;
+        };
+    </script>
+    
+    <script src="_site/assets/js/analytics.js"></script>
+    
+    <script>
+        let analytics;
+        
+        // Initialize analytics after DOM loads
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                analytics = window.AnalyticsServiceFactory.getInstance(mockAnalyticsConfig, 'en');
+                document.getElementById('status').innerHTML = '✅ Analytics service initialized successfully';
+                console.log('Analytics service initialized');
+            } catch (error) {
+                document.getElementById('status').innerHTML = '❌ Failed to initialize: ' + error.message;
+                console.error('Failed to initialize analytics:', error);
+            }
+        });
+        
+        // Test functions
+        function testShowConsent() {
+            if (analytics) {
+                analytics.showConsentManager();
+                console.log('Consent banner shown');
+            }
+        }
+        
+        function testTrackEvent() {
+            if (analytics) {
+                analytics.trackEvent('test_event', {
+                    event_category: 'testing',
+                    event_label: 'manual_test',
+                    value: 1
+                });
+                console.log('Test event tracked');
+            }
+        }
+        
+        function testLanguageSwitch() {
+            if (analytics) {
+                analytics.updateLanguage('ru');
+                console.log('Language switched to Russian');
+            }
+        }
+        
+        function testGetConsentStatus() {
+            if (analytics) {
+                const status = analytics.getConsentStatus();
+                console.log('Consent status:', status);
+            }
+        }
+        
+        function testRevokeConsent() {
+            if (analytics) {
+                analytics.revokeConsent();
+                console.log('Consent revoked');
+            }
+        }
+    </script>
+</body>
+</html>

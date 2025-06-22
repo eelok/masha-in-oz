@@ -51,5 +51,38 @@
     {% include "partials/footer.njk" %}
     
     <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/analytics.js"></script>
+    
+    <!-- Analytics initialization -->
+    <script>
+      // Pass site configuration and consent text to analytics service
+      window.siteConsent = {{ site.consent | dump | safe }};
+      
+      // Initialize analytics service when DOM is loaded
+      document.addEventListener('DOMContentLoaded', function() {
+        // Get current language from page or default to 'en'
+        const currentLang = '{{ lang or "en" }}';
+        
+        // Analytics configuration from site data
+        const analyticsConfig = {{ site.analytics | dump | safe }};
+        
+        // Initialize analytics service
+        if (window.AnalyticsServiceFactory && analyticsConfig) {
+          window.analytics = window.AnalyticsServiceFactory.getInstance(
+            analyticsConfig,
+            currentLang
+          );
+          
+          // Add language switcher tracking
+          document.addEventListener('click', function(event) {
+            const langLink = event.target.closest('[data-language]');
+            if (langLink && window.analytics) {
+              const newLang = langLink.getAttribute('data-language');
+              window.analytics.updateLanguage(newLang);
+            }
+          });
+        }
+      });
+    </script>
 </body>
 </html>

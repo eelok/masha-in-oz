@@ -1,0 +1,211 @@
+---
+# Privacy Policy Partial Template
+# Provides GDPR-compliant privacy policy content for multilingual site
+---
+
+{% set privacyContent = {
+  en: {
+    title: "Privacy Policy",
+    lastUpdated: "Last updated: June 22, 2024",
+    sections: {
+      introduction: {
+        title: "Introduction",
+        content: "We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, and protect your information when you visit our website."
+      },
+      dataCollection: {
+        title: "Data We Collect",
+        content: "We may collect the following information:",
+        items: [
+          "Usage data through Google Analytics (with your consent)",
+          "Language preferences",
+          "Device and browser information",
+          "Pages visited and time spent on site"
+        ]
+      },
+      cookies: {
+        title: "Cookies and Tracking",
+        content: "We use cookies and similar technologies to:",
+        items: [
+          "Remember your cookie preferences",
+          "Analyze website traffic and usage patterns",
+          "Improve our website performance",
+          "Provide personalized content"
+        ]
+      },
+      rights: {
+        title: "Your Rights",
+        content: "Under GDPR, you have the right to:",
+        items: [
+          "Access your personal data",
+          "Correct inaccurate data",
+          "Delete your data",
+          "Object to data processing",
+          "Withdraw consent at any time"
+        ]
+      },
+      contact: {
+        title: "Contact Us",
+        content: "If you have questions about this privacy policy, please contact us at:"
+      }
+    }
+  },
+  ru: {
+    title: "Политика конфиденциальности",
+    lastUpdated: "Последнее обновление: 22 июня 2024 г.",
+    sections: {
+      introduction: {
+        title: "Введение",
+        content: "Мы уважаем вашу конфиденциальность и стремимся защитить ваши персональные данные. Эта политика конфиденциальности объясняет, как мы собираем, используем и защищаем вашу информацию при посещении нашего сайта."
+      },
+      dataCollection: {
+        title: "Данные, которые мы собираем",
+        content: "Мы можем собирать следующую информацию:",
+        items: [
+          "Данные об использовании через Google Analytics (с вашего согласия)",
+          "Языковые предпочтения",
+          "Информация об устройстве и браузере",
+          "Посещенные страницы и время на сайте"
+        ]
+      },
+      cookies: {
+        title: "Файлы cookie и отслеживание",
+        content: "Мы используем файлы cookie и аналогичные технологии для:",
+        items: [
+          "Запоминания ваших предпочтений по файлам cookie",
+          "Анализа трафика и использования сайта",
+          "Улучшения производительности сайта",
+          "Предоставления персонализированного контента"
+        ]
+      },
+      rights: {
+        title: "Ваши права",
+        content: "Согласно GDPR, у вас есть право:",
+        items: [
+          "Получить доступ к вашим персональным данным",
+          "Исправить неточные данные",
+          "Удалить ваши данные",
+          "Возразить против обработки данных",
+          "Отозвать согласие в любое время"
+        ]
+      },
+      contact: {
+        title: "Свяжитесь с нами",
+        content: "Если у вас есть вопросы по этой политике конфиденциальности, свяжитесь с нами:"
+      }
+    }
+  },
+  de: {
+    title: "Datenschutzrichtlinie",
+    lastUpdated: "Zuletzt aktualisiert: 22. Juni 2024",
+    sections: {
+      introduction: {
+        title: "Einführung",
+        content: "Wir respektieren Ihre Privatsphäre und verpflichten uns, Ihre persönlichen Daten zu schützen. Diese Datenschutzrichtlinie erklärt, wie wir Ihre Informationen sammeln, verwenden und schützen, wenn Sie unsere Website besuchen."
+      },
+      dataCollection: {
+        title: "Daten, die wir sammeln",
+        content: "Wir können folgende Informationen sammeln:",
+        items: [
+          "Nutzungsdaten über Google Analytics (mit Ihrer Zustimmung)",
+          "Sprachpräferenzen",
+          "Geräte- und Browser-Informationen",
+          "Besuchte Seiten und Verweildauer auf der Site"
+        ]
+      },
+      cookies: {
+        title: "Cookies und Tracking",
+        content: "Wir verwenden Cookies und ähnliche Technologien für:",
+        items: [
+          "Speicherung Ihrer Cookie-Präferenzen",
+          "Analyse von Website-Traffic und Nutzungsmustern",
+          "Verbesserung der Website-Performance",
+          "Bereitstellung personalisierter Inhalte"
+        ]
+      },
+      rights: {
+        title: "Ihre Rechte",
+        content: "Unter der DSGVO haben Sie das Recht:",
+        items: [
+          "Auf Ihre persönlichen Daten zuzugreifen",
+          "Unrichtige Daten zu korrigieren",
+          "Ihre Daten zu löschen",
+          "Der Datenverarbeitung zu widersprechen",
+          "Die Einwilligung jederzeit zu widerrufen"
+        ]
+      },
+      contact: {
+        title: "Kontaktieren Sie uns",
+        content: "Bei Fragen zu dieser Datenschutzrichtlinie kontaktieren Sie uns unter:"
+      }
+    }
+  }
+} %}
+
+{% set currentContent = privacyContent[lang] or privacyContent.en %}
+
+<div class="privacy-policy">
+  <h1>{{ currentContent.title }}</h1>
+  <p class="last-updated">{{ currentContent.lastUpdated }}</p>
+  
+  <section class="privacy-section">
+    <h2>{{ currentContent.sections.introduction.title }}</h2>
+    <p>{{ currentContent.sections.introduction.content }}</p>
+  </section>
+  
+  <section class="privacy-section">
+    <h2>{{ currentContent.sections.dataCollection.title }}</h2>
+    <p>{{ currentContent.sections.dataCollection.content }}</p>
+    <ul>
+      {% for item in currentContent.sections.dataCollection.items %}
+        <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+  
+  <section class="privacy-section">
+    <h2>{{ currentContent.sections.cookies.title }}</h2>
+    <p>{{ currentContent.sections.cookies.content }}</p>
+    <ul>
+      {% for item in currentContent.sections.cookies.items %}
+        <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+    
+    <div class="cookie-controls">
+      <button type="button" id="manage-cookies" class="consent-btn consent-btn-customize">
+        {% if lang == 'ru' %}Управление файлами cookie{% elif lang == 'de' %}Cookie-Einstellungen verwalten{% else %}Manage Cookie Settings{% endif %}
+      </button>
+    </div>
+  </section>
+  
+  <section class="privacy-section">
+    <h2>{{ currentContent.sections.rights.title }}</h2>
+    <p>{{ currentContent.sections.rights.content }}</p>
+    <ul>
+      {% for item in currentContent.sections.rights.items %}
+        <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+  
+  <section class="privacy-section">
+    <h2>{{ currentContent.sections.contact.title }}</h2>
+    <p>{{ currentContent.sections.contact.content }}</p>
+    <p>
+      <strong>Email:</strong> {{ site.author.email }}<br>
+      <strong>{% if lang == 'ru' %}Сайт{% elif lang == 'de' %}Website{% else %}Website{% endif %}:</strong> {{ site.url }}
+    </p>
+  </section>
+</div>
+
+<script>
+  // Add event listener for cookie management button
+  document.addEventListener('DOMContentLoaded', function() {
+    const manageCookiesBtn = document.getElementById('manage-cookies');
+    if (manageCookiesBtn && window.analytics) {
+      manageCookiesBtn.addEventListener('click', function() {
+        window.analytics.showConsentManager();
+      });
+    }
+  });
+</script>
