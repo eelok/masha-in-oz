@@ -1,24 +1,24 @@
 module.exports = {
   title: {
-    en: "My Blog",
-    ru: "Мой Блог", 
-    de: "Mein Blog"
+    en: "Masha in the land of Oz",
+    ru: "Маша в стране Оз", 
+    de: "Masha im Lande Oz"
   },
   description: {
-    en: "A multilingual blog about life and technology",
-    ru: "Многоязычный блог о жизни и технологиях",
-    de: "Ein mehrsprachiger Blog über Leben und Technologie"
+    en: "Where fondue meets bortsch",
+    ru: "Где фондю встречает борщ",
+    de: "Wo Fondue auf Borschtsch trifft"
   },
   url: "https://yourdomain.com",
   author: {
-    name: "Your Wife's Name",
+    name: "Masha",
     email: "email@example.com"
   },
   languages: {
     en: {
       code: "en",
       name: "English",
-      flag: "🇺🇸"
+      flag: "🇬🇧"
     },
     ru: {
       code: "ru", 

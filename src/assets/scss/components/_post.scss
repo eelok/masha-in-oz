@@ -35,6 +35,7 @@
 .post-tags {
   display: flex;
   gap: $spacing-xs;
+  flex-wrap: wrap;
 }
 
 .tag {
