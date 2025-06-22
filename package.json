@@ -3,19 +3,29 @@
   "version": "1.0.0",
   "description": "Multilingual blog with Eleventy",
   "scripts": {
-    "start": "eleventy --serve --port=8080",
+    "sass:build": "sass src/assets/scss/main.scss src/assets/css/main.css --style=compressed --no-source-map",
+    "sass:watch": "sass src/assets/scss/main.scss src/assets/css/main.css --watch --style=expanded --source-map",
+    "sass:dev": "sass src/assets/scss/main.scss src/assets/css/main.css --style=expanded --source-map",
+    "prebuild": "npm run sass:build",
+    "prestart": "npm run sass:dev",
+    "start": "npm run sass:watch & eleventy --serve --port=8080",
     "build": "eleventy",
     "debug": "DEBUG=Eleventy* eleventy",
-    "clean": "rm -rf _site"
+    "clean": "rm -rf _site src/assets/css/main.css src/assets/css/main.css.map"
   },
-  "keywords": ["eleventy", "blog", "multilingual"],
+  "keywords": [
+    "eleventy",
+    "blog",
+    "multilingual"
+  ],
   "author": "Your Name",
   "license": "MIT",
   "devDependencies": {
     "@11ty/eleventy": "^3.1.1",
     "@11ty/eleventy-navigation": "^1.0.4",
     "markdown-it": "^14.1.0",
-    "markdown-it-anchor": "^9.2.0"
+    "markdown-it-anchor": "^9.2.0",
+    "sass": "^1.89.2"
   },
   "dependencies": {
     "luxon": "^3.6.1"
