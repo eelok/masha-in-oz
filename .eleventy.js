@@ -92,8 +92,6 @@ module.exports = function (eleventyConfig) {
     templateFormats: ["md", "njk", "html", "liquid"],
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
-    pathPrefix:
-      process.env.ELEVENTY_ENV === "production" ? "/masha-in-oz/" : "/",
     dir: {
       input: "src",
       includes: "_includes",
