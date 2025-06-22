@@ -1,0 +1,17 @@
+// ==========================================================================
+// BASE LAYOUT
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.header-container,
+.footer-container,
+.main-content {
+  @include container;
+}
+
+.main-content {
+  padding: $spacing-xl $spacing-sm;
+  min-height: calc(100vh - 200px);
+}

@@ -1,0 +1,77 @@
+// ==========================================================================
+// VARIABLES
+// ==========================================================================
+
+// Brand Colors
+$color-primary: #2563eb;
+$color-primary-light: rgba(37, 99, 235, 0.1);
+
+// Text Colors
+$color-text: #1f2937;
+$color-text-light: #6b7280;
+
+// Background Colors
+$color-background: #ffffff;
+$color-surface: #f9fafb;
+$color-border: #e5e7eb;
+
+// Dark Theme Colors
+$color-primary-dark: #3b82f6;
+$color-text-dark: #f9fafb;
+$color-text-light-dark: #d1d5db;
+$color-background-dark: #111827;
+$color-surface-dark: #1f2937;
+$color-border-dark: #374151;
+
+// Typography
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+
+// Font Sizes
+$font-size-xs: 0.8rem;
+$font-size-sm: 0.875rem;
+$font-size-base: 1rem;
+$font-size-lg: 1.1rem;
+$font-size-xl: 1.2rem;
+$font-size-2xl: 1.5rem;
+$font-size-3xl: 1.875rem;
+$font-size-4xl: 2.25rem;
+$font-size-5xl: 2.5rem;
+
+// Line Heights
+$line-height-tight: 1.3;
+$line-height-normal: 1.6;
+
+// Layout
+$max-width: 800px;
+$header-height: 70px;
+$burger-size: 24px;
+
+// Spacing
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 1.5rem;
+$spacing-lg: 2rem;
+$spacing-xl: 3rem;
+
+// Z-Index
+$z-mobile-menu: 1000;
+
+// Transitions
+$transition-speed: 0.3s;
+$transition-timing: ease;
+
+// Border Radius
+$border-radius-sm: 0.25rem;
+$border-radius-md: 0.5rem;
+$border-radius-lg: 0.75rem;
+
+// Shadows
+$shadow-sm: 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+// Breakpoints
+$breakpoint-mobile: 768px;

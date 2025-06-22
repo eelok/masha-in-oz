@@ -1,0 +1,39 @@
+// ==========================================================================
+// MAIN SCSS ENTRY POINT
+// Multilingual Blog Styles
+// ==========================================================================
+
+// 1. ABSTRACTS
+// Variables, mixins, functions - no output
+@use 'abstracts/variables' as *;
+@use 'abstracts/functions' as *;
+@use 'abstracts/mixins' as *;
+
+// 2. THEMES
+// CSS custom properties for theming
+@use 'themes/light';
+@use 'themes/dark';
+
+// 3. BASE
+// Reset, typography, base layout rules
+@use 'base/reset';
+@use 'base/typography';
+@use 'base/layout';
+
+// 4. COMPONENTS
+// Specific UI components
+@use 'components/header';
+@use 'components/burger-menu';
+@use 'components/navigation';
+@use 'components/language-selector';
+@use 'components/post';
+@use 'components/blog-list';
+@use 'components/footer';
+
+// 5. UTILITIES
+// Helper classes
+@use 'utilities/utilities';
+
+// 6. ACCESSIBILITY
+// Accessibility-specific styles
+@use 'themes/accessibility';

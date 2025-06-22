@@ -1,0 +1,47 @@
+// ==========================================================================
+// BURGER MENU COMPONENT
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use '../abstracts/functions' as *;
+
+.burger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: $burger-size;
+  height: $burger-size;
+  @include button-reset;
+  z-index: z('mobile-menu-button');
+  position: relative;
+  @include hover-scale();
+
+  @include mobile {
+    display: flex;
+  }
+}
+
+.burger-line {
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-text);
+  border-radius: 1px;
+  transform-origin: center;
+  @include transition(all);
+}
+
+// Burger Menu Animation
+.burger-menu[aria-expanded="true"] {
+  .burger-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .burger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .burger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+  }
+}

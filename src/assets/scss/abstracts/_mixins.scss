@@ -1,0 +1,128 @@
+// ==========================================================================
+// MIXINS
+// ==========================================================================
+
+@use 'variables' as *;
+
+// Media Queries
+@mixin mobile {
+  @media (max-width: $breakpoint-mobile) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$breakpoint-mobile + 1px}) {
+    @content;
+  }
+}
+
+// Button Reset
+@mixin button-reset {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  
+  &:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+// List Reset
+@mixin list-reset {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+// Hover Effects
+@mixin hover-scale($scale: 1.1) {
+  transition: transform $transition-speed $transition-timing;
+  
+  &:hover {
+    transform: scale($scale);
+  }
+  
+  @include mobile {
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
+// Focus Ring
+@mixin focus-ring {
+  &:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+// Flex Center
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Flex Between
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// Container
+@mixin container {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 $spacing-sm;
+}
+
+// Visually Hidden (for accessibility)
+@mixin visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+// Text Truncate
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Transitions
+@mixin transition($properties: all) {
+  transition: $properties $transition-speed $transition-timing;
+}
+
+// Interactive Element
+@mixin interactive-element {
+  @include transition();
+  @include focus-ring();
+  
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+// Link Style Reset
+@mixin link-reset {
+  color: inherit;
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: none;
+  }
+}

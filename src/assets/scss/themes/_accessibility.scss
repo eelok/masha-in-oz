@@ -1,0 +1,19 @@
+// ==========================================================================
+// ACCESSIBILITY
+// ==========================================================================
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+// High contrast mode support (can be extended)
+@media (prefers-contrast: high) {
+  // Add high contrast specific styles if needed
+}

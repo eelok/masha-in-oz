@@ -1,0 +1,17 @@
+// ==========================================================================
+// BASE RESET
+// ==========================================================================
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+// Prevent body scroll when menu is open
+body.menu-open {
+  overflow: hidden;
+}

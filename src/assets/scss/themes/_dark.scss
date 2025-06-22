@@ -1,0 +1,16 @@
+// ==========================================================================
+// DARK THEME
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: #{$color-primary-dark};
+    --color-text: #{$color-text-dark};
+    --color-text-light: #{$color-text-light-dark};
+    --color-background: #{$color-background-dark};
+    --color-surface: #{$color-surface-dark};
+    --color-border: #{$color-border-dark};
+  }
+}

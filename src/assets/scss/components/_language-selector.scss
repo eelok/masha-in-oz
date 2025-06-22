@@ -1,0 +1,62 @@
+// ==========================================================================
+// LANGUAGE SELECTOR COMPONENT
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// Desktop Language Selector
+.language-selector {
+  display: flex;
+  gap: $spacing-xs;
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.lang-switch {
+  font-size: $font-size-xl;
+  opacity: 0.6;
+  @include transition(opacity);
+  padding: $spacing-xs;
+  border-radius: $border-radius-sm;
+
+  &:hover,
+  &.active {
+    opacity: 1;
+    background-color: var(--color-primary-light);
+    text-decoration: none;
+  }
+}
+
+// Post Language Switcher
+.language-switcher {
+  padding: $spacing-md;
+  background-color: var(--color-surface);
+  border-radius: $border-radius-md;
+  border: 1px solid var(--color-border);
+}
+
+.switcher-label {
+  display: block;
+  margin-bottom: $spacing-xs;
+  font-weight: $font-weight-medium;
+  color: var(--color-text-light);
+}
+
+.lang-link {
+  display: inline-block;
+  margin-right: $spacing-sm;
+  padding: 0.25rem 0.5rem;
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: $border-radius-sm;
+  font-size: $font-size-sm;
+
+  &:hover {
+    background-color: var(--color-primary);
+    color: white;
+    text-decoration: none;
+  }
+}

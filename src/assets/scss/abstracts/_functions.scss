@@ -1,0 +1,34 @@
+// ==========================================================================
+// FUNCTIONS
+// ==========================================================================
+
+@use 'sass:map';
+@use 'variables' as *;
+
+// Convert px to rem
+@function rem($pixels, $context: 16) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+  
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+  
+  @return $pixels / $context * 1rem;
+}
+
+// Get z-index value
+@function z($layer) {
+  $z-indexes: (
+    'mobile-menu': $z-mobile-menu,
+    'mobile-menu-button': $z-mobile-menu + 1,
+  );
+  
+  @return map.get($z-indexes, $layer);
+}
+
+// Color opacity
+@function alpha($color, $opacity) {
+  @return rgba($color, $opacity);
+}

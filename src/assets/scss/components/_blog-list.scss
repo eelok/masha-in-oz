@@ -1,0 +1,31 @@
+// ==========================================================================
+// BLOG LIST COMPONENT
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.posts-list {
+  @include list-reset;
+}
+
+.post-item {
+  padding: $spacing-md 0;
+  border-bottom: 1px solid var(--color-border);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  h3 {
+    margin-bottom: $spacing-xs;
+  }
+
+  .post-meta {
+    margin-bottom: $spacing-xs;
+  }
+}
+
+.post-excerpt {
+  color: var(--color-text-light);
+}

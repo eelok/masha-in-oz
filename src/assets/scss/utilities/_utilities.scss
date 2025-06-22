@@ -1,0 +1,21 @@
+// ==========================================================================
+// UTILITY CLASSES
+// ==========================================================================
+
+@use '../abstracts/mixins' as *;
+
+.desktop-only {
+  display: flex;
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.mobile-only {
+  display: none;
+
+  @include mobile {
+    display: block;
+  }
+}

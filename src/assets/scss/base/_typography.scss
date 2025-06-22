@@ -1,0 +1,46 @@
+// ==========================================================================
+// TYPOGRAPHY
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+body {
+  font-family: var(--font-family);
+  line-height: $line-height-normal;
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+// Headings
+h1, h2, h3, h4, h5, h6 {
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+  margin: 0 0 $spacing-sm 0;
+}
+
+h1 { font-size: $font-size-4xl; }
+h2 { font-size: $font-size-3xl; }
+h3 { font-size: $font-size-2xl; }
+
+// Paragraphs
+p {
+  margin: 0 0 $spacing-sm 0;
+}
+
+// Links
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Mobile typography adjustments
+@include mobile {
+  h1 {
+    font-size: $font-size-3xl;
+  }
+}

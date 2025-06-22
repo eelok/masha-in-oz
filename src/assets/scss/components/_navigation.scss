@@ -1,0 +1,134 @@
+// ==========================================================================
+// NAVIGATION COMPONENT
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use '../abstracts/functions' as *;
+
+.main-nav {
+  display: flex;
+
+  @include mobile {
+    position: fixed;
+    top: $header-height;
+    left: 0;
+    right: 0;
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: $shadow-md;
+    z-index: z('mobile-menu');
+    
+    // Hidden by default
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    @include transition(all);
+    
+    // CSS-only fallback for :target pseudo-class
+    max-height: 0;
+    overflow: hidden;
+
+    // Show navigation when burger menu is expanded
+    &:target,
+    &.nav-open {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+      max-height: calc(100vh - #{$header-height});
+      overflow-y: auto;
+    }
+  }
+}
+
+.nav-list {
+  @include list-reset;
+  display: flex;
+  gap: $spacing-md;
+  align-items: center;
+
+  @include mobile {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    padding: $spacing-md;
+    gap: 0;
+  }
+}
+
+.nav-item {
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.nav-link {
+  color: var(--color-text-light);
+  font-weight: $font-weight-medium;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $border-radius-sm;
+  @include interactive-element;
+
+  &:hover,
+  &.active {
+    color: var(--color-primary);
+    background-color: var(--color-primary-light);
+  }
+
+  @include mobile {
+    display: block;
+    width: 100%;
+    padding: $spacing-md;
+    border-bottom: 1px solid var(--color-border);
+    font-size: $font-size-lg;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+// Mobile Navigation Language Section
+.nav-languages {
+  display: none;
+
+  @include mobile {
+    display: block;
+    border-top: 1px solid var(--color-border);
+    padding-top: $spacing-md;
+    margin-top: $spacing-md;
+  }
+}
+
+.nav-section-title {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: var(--color-text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: $spacing-xs;
+  display: block;
+}
+
+.nav-language-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.nav-lang-link {
+  color: var(--color-text);
+  font-weight: $font-weight-normal;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $border-radius-sm;
+  @include interactive-element;
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+
+  &:hover,
+  &.active {
+    color: var(--color-primary);
+    background-color: var(--color-primary-light);
+  }
+}
