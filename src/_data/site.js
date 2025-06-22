@@ -12,7 +12,7 @@ module.exports = {
     de: "Wo Fondue auf Borschtsch trifft"
   },
   url: isProduction ? "https://wassertim.github.io" : "http://localhost:8080",
-  baseUrl: isProduction ? "/masha-in-oz/" : "/",
+  baseUrl: isProduction ? "/masha-in-oz" : "/",
   get fullUrl() {
     return this.url + this.baseUrl;
   },
