@@ -48,15 +48,15 @@ module.exports = function (eleventyConfig) {
 
   // Collection for each language
   eleventyConfig.addCollection("posts_en", function (collectionApi) {
-    return collectionApi.getFilteredByGlob("src/pages/en/posts/*.md").reverse();
+    return collectionApi.getFilteredByGlob("src/en/posts/*.md").reverse();
   });
 
   eleventyConfig.addCollection("posts_ru", function (collectionApi) {
-    return collectionApi.getFilteredByGlob("src/pages/ru/posts/*.md").reverse();
+    return collectionApi.getFilteredByGlob("src/ru/posts/*.md").reverse();
   });
 
   eleventyConfig.addCollection("posts_de", function (collectionApi) {
-    return collectionApi.getFilteredByGlob("src/pages/de/posts/*.md").reverse();
+    return collectionApi.getFilteredByGlob("src/de/posts/*.md").reverse();
   });
 
   // Collection for featured posts (posts with featured_image)
