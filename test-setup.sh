@@ -1,5 +1,4 @@
 #!/bin/bash
-
 echo "🚀 Testing Multilingual Blog Setup..."
 
 # Check if we're in the correct directory
