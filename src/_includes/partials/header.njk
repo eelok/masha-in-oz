@@ -1,7 +1,7 @@
 <header class="site-header">
     <div class="header-container">
         <div class="site-brand">
-            <a href="/{{ lang }}/" class="site-title">
+            <a href="{{ ('/' + lang + '/') | url }}" class="site-title">
                 {{ site.title[lang] or site.title.en }}
             </a>
         </div>
@@ -21,7 +21,7 @@
             <ul class="nav-list">
                 {% for item in site.navigation[lang] %}
                     <li class="nav-item">
-                        <a href="{{ item.url }}" 
+                        <a href="{{ item.url | url }}" 
                            class="nav-link {% if page.url == item.url %}active{% endif %}">
                             {{ item.text }}
                         </a>
@@ -35,7 +35,7 @@
                     </span>
                     <div class="nav-language-list">
                         {% for langCode, langData in site.languages %}
-                            <a href="/{{ langCode }}/" 
+                            <a href="{{ ('/' + langCode + '/') | url }}" 
                                class="nav-lang-link {% if lang == langCode %}active{% endif %}"
                                title="{{ langData.name }}"
                                data-language="{{ langCode }}">
@@ -50,7 +50,7 @@
         <!-- Desktop Language Selector -->
         <div class="language-selector desktop-only">
             {% for langCode, langData in site.languages %}
-                <a href="/{{ langCode }}/" 
+                <a href="{{ ('/' + langCode + '/') | url }}" 
                    class="lang-switch {% if lang == langCode %}active{% endif %}"
                    title="{{ langData.name }}"
                    data-language="{{ langCode }}">
