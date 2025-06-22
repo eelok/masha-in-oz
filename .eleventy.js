@@ -1,7 +1,7 @@
 const { DateTime } = require("luxon");
 
 module.exports = function(eleventyConfig) {
-  // Copy assets
+  // Copy assets including images
   eleventyConfig.addPassthroughCopy("src/assets");
   
   // Date filter
@@ -37,6 +37,12 @@ module.exports = function(eleventyConfig) {
     return array.slice(0, limit);
   });
 
+  // Excerpt filter for blog post previews
+  eleventyConfig.addFilter("excerpt", (content, limit = 200) => {
+    const text = content.replace(/<[^>]*>/g, ''); // Remove HTML tags
+    return text.length > limit ? text.substring(0, limit) + '...' : text;
+  });
+
   // Collection for each language
   eleventyConfig.addCollection("posts_en", function(collectionApi) {
     return collectionApi.getFilteredByGlob("src/posts/en/*.md").reverse();
@@ -48,6 +54,13 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addCollection("posts_de", function(collectionApi) {
     return collectionApi.getFilteredByGlob("src/posts/de/*.md").reverse();
+  });
+
+  // Collection for featured posts (posts with featured_image)
+  eleventyConfig.addCollection("featuredPosts", function(collectionApi) {
+    return collectionApi.getAll().filter(item => {
+      return item.data.featured_image && item.data.featured_image.length > 0;
+    }).reverse();
   });
 
   // Markdown configuration

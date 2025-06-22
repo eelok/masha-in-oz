@@ -6,11 +6,35 @@
     <title>{{ title }} | {{ site.title[lang] or site.title.en }}</title>
     <meta name="description" content="{{ description or site.description[lang] }}">
     
-    <!-- Open Graph -->
-    <meta property="og:title" content="{{ title }}">
-    <meta property="og:description" content="{{ description or site.description[lang] }}">
-    <meta property="og:type" content="website">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="{% if page.url == '/' %}website{% else %}article{% endif %}">
     <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:title" content="{{ title }} | {{ site.title[lang] or site.title.en }}">
+    <meta property="og:description" content="{{ description or site.description[lang] }}">
+    {% if featured_image %}
+    <meta property="og:image" content="{{ site.url }}{{ featured_image }}">
+    <meta property="og:image:alt" content="{{ featured_image_alt if featured_image_alt else title }}">
+    {% endif %}
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="twitter:title" content="{{ title }} | {{ site.title[lang] or site.title.en }}">
+    <meta property="twitter:description" content="{{ description or site.description[lang] }}">
+    {% if featured_image %}
+    <meta property="twitter:image" content="{{ site.url }}{{ featured_image }}">
+    <meta property="twitter:image:alt" content="{{ featured_image_alt if featured_image_alt else title }}">
+    {% endif %}
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+    
+    <!-- Language alternatives -->
+    {% for langCode, langData in site.languages %}
+        {% if langCode != lang %}
+        <link rel="alternate" hreflang="{{ langCode }}" href="{{ site.url }}/{{ langCode }}{{ page.url | replace('/en/', '/') | replace('/ru/', '/') | replace('/de/', '/') }}">
+        {% endif %}
+    {% endfor %}
     
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
