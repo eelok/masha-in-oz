@@ -6,7 +6,18 @@
             </a>
         </div>
         
-        <nav class="main-nav">
+        <!-- Burger Menu Button -->
+        <button class="burger-menu" 
+                aria-expanded="false" 
+                aria-controls="main-navigation"
+                aria-label="{% if lang == 'ru' %}Открыть меню{% elif lang == 'de' %}Menü öffnen{% else %}Open menu{% endif %}">
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+        </button>
+        
+        <!-- Navigation Menu -->
+        <nav class="main-nav" id="main-navigation">
             <ul class="nav-list">
                 {% for item in site.navigation[lang] %}
                     <li class="nav-item">
@@ -16,10 +27,27 @@
                         </a>
                     </li>
                 {% endfor %}
+                
+                <!-- Language Selector in Mobile Menu -->
+                <li class="nav-item nav-languages">
+                    <span class="nav-section-title">
+                        {% if lang == 'ru' %}Язык{% elif lang == 'de' %}Sprache{% else %}Language{% endif %}
+                    </span>
+                    <div class="nav-language-list">
+                        {% for langCode, langData in site.languages %}
+                            <a href="/{{ langCode }}/" 
+                               class="nav-lang-link {% if lang == langCode %}active{% endif %}"
+                               title="{{ langData.name }}">
+                                {{ langData.flag }} {{ langData.name }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </li>
             </ul>
         </nav>
         
-        <div class="language-selector">
+        <!-- Desktop Language Selector -->
+        <div class="language-selector desktop-only">
             {% for langCode, langData in site.languages %}
                 <a href="/{{ langCode }}/" 
                    class="lang-switch {% if lang == langCode %}active{% endif %}"

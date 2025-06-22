@@ -5,6 +5,7 @@ A modern, multilingual blog built with [Eleventy](https://11ty.dev) supporting E
 ## Features
 
 - **Multilingual Support**: Content in English, Russian, and German
+- **Responsive Burger Menu**: Mobile-first navigation with accessibility support
 - **Clean, Modern Design**: Responsive CSS with Inter font
 - **SEO Optimized**: Open Graph and Twitter Card meta tags
 - **Featured Images**: Support for blog post featured images
@@ -12,6 +13,8 @@ A modern, multilingual blog built with [Eleventy](https://11ty.dev) supporting E
 - **Markdown Support**: Write posts in Markdown with front matter
 - **Automatic Collections**: Language-specific post collections
 - **Social Media Ready**: Proper meta tags for sharing
+- **Accessibility First**: WCAG 2.1 AA compliant navigation and interactions
+- **Progressive Enhancement**: Works without JavaScript, enhanced with JS
 
 ## Project Structure
 
@@ -74,6 +77,25 @@ npm run build
 
 The generated site will be in the `_site` directory.
 
+## Navigation System
+
+### Responsive Burger Menu
+
+The site features a modern, accessible burger menu that automatically adapts to different screen sizes:
+
+- **Desktop**: Traditional horizontal navigation with language flags
+- **Mobile**: Collapsible burger menu with full navigation and language selection
+- **Accessibility**: Full keyboard navigation, screen reader support, and ARIA attributes
+- **Progressive Enhancement**: Works without JavaScript, enhanced with smooth animations when JS is available
+
+### Navigation Features
+
+- **Multilingual Labels**: Menu buttons show appropriate text based on the current language
+- **Keyboard Support**: Full keyboard navigation with Enter, Space, and Escape key support
+- **Screen Reader Support**: Proper ARIA attributes and live region announcements
+- **Focus Management**: Logical focus flow and visual focus indicators
+- **Touch-Friendly**: Optimized for mobile and touch devices
+
 ## Creating Content
 
 ### Writing Blog Posts
@@ -131,40 +153,48 @@ Your post can include images, links, and all standard Markdown formatting.
 
 ### Site Configuration
 
-Edit `src/_data/site.json` to update site-wide settings:
+Edit `src/_data/site.js` to update site-wide settings:
 
-```json
-{
-  "title": {
-    "en": "My Blog",
-    "ru": "Мой блог",
-    "de": "Mein Blog"
+```javascript
+module.exports = {
+  title: {
+    en: "My Blog",
+    ru: "Мой блог",
+    de: "Mein Blog"
   },
-  "description": {
-    "en": "A multilingual blog",
-    "ru": "Многоязычный блог",
-    "de": "Ein mehrsprachiger Blog"
+  description: {
+    en: "A multilingual blog",
+    ru: "Многоязычный блог",
+    de: "Ein mehrsprachiger Blog"
   },
-  "url": "https://yourdomain.com",
-  "author": {
-    "name": "Your Name",
-    "email": "your.email@example.com"
+  url: "https://yourdomain.com",
+  author: {
+    name: "Your Name",
+    email: "your.email@example.com"
   },
-  "languages": {
-    "en": {
-      "name": "English",
-      "flag": "🇺🇸"
+  languages: {
+    en: {
+      name: "English",
+      flag: "🇺🇸"
     },
-    "ru": {
-      "name": "Русский",
-      "flag": "🇷🇺"
+    ru: {
+      name: "Русский",
+      flag: "🇷🇺"
     },
-    "de": {
-      "name": "Deutsch",
-      "flag": "🇩🇪"
+    de: {
+      name: "Deutsch",
+      flag: "🇩🇪"
     }
+  },
+  navigation: {
+    en: [
+      { text: "Home", url: "/en/" },
+      { text: "Blog", url: "/en/blog/" },
+      { text: "About", url: "/en/about/" }
+    ],
+    // ... other languages
   }
-}
+};
 ```
 
 ### Eleventy Configuration
@@ -191,11 +221,39 @@ The site uses modern CSS with CSS custom properties (variables) for easy theming
 
 ### Key CSS Features
 
-- Responsive design with mobile-first approach
-- Clean typography using Inter font
-- Proper contrast ratios for accessibility
-- Featured image styling with hover effects
-- Language switcher styling
+- **Mobile-First Responsive Design**: Progressive enhancement approach
+- **CSS Custom Properties**: Consistent design system with CSS variables
+- **Burger Menu Animations**: Smooth, accessible transitions
+- **Dark Mode Support**: Automatic dark mode based on system preferences
+- **Reduced Motion Support**: Respects user motion preferences
+- **Clean Typography**: Inter font with proper contrast ratios
+
+### CSS Architecture
+
+- **Component-Based**: Modular, maintainable CSS structure
+- **BEM-Inspired**: Clear naming conventions for CSS classes
+- **Performance Optimized**: Minimal, semantic CSS
+- **Accessibility First**: Focus states, contrast ratios, and screen reader support
+
+## JavaScript Features
+
+The site uses progressive enhancement with vanilla JavaScript:
+
+### Burger Menu (`BurgerMenu` class)
+- **Accessibility**: Full ARIA support and keyboard navigation
+- **Screen Reader Support**: Live region announcements
+- **Focus Management**: Proper focus flow and restoration
+- **Event Handling**: Click, keyboard, and resize event handling
+
+### Smooth Scrolling (`SmoothScroll` class)
+- **Anchor Links**: Smooth scrolling to page sections
+- **Header Offset**: Accounts for fixed header height
+- **Accessibility**: Focus management for scrolled-to elements
+
+### Utilities (`Utils` class)
+- **Performance**: Loading states and print handling
+- **Accessibility**: Motion preference detection
+- **Device Detection**: Touch device support
 
 ## Deployment
 
@@ -216,19 +274,41 @@ The generated static site in `_site/` can be deployed to:
 
 ### Environment Variables
 
-For production deployment, update the `site.url` in `src/_data/site.json` to your actual domain.
+For production deployment, update the `site.url` in `src/_data/site.js` to your actual domain.
+
+## Accessibility
+
+This blog is built with accessibility as a first-class citizen:
+
+### Navigation Accessibility
+- **ARIA Attributes**: Proper labeling and state management
+- **Keyboard Navigation**: Full keyboard support for all interactive elements
+- **Screen Reader Support**: Meaningful announcements and descriptions
+- **Focus Management**: Clear focus indicators and logical flow
+
+### Content Accessibility
+- **Semantic HTML**: Proper heading hierarchy and landmark roles
+- **Color Contrast**: WCAG 2.1 AA compliant color combinations
+- **Alternative Text**: Required alt text for all images
+- **Language Attributes**: Proper language identification for screen readers
+
+### Technical Accessibility
+- **Progressive Enhancement**: Core functionality without JavaScript
+- **Reduced Motion**: Respects user motion preferences
+- **High Contrast**: Support for high contrast mode
+- **Zoom Support**: Layout remains functional at 200% zoom
 
 ## Customization
 
 ### Adding a New Language
 
-1. Add the language to `src/_data/site.json`
+1. Add the language to `src/_data/site.js`
 2. Create language-specific directories:
    - `src/pages/[lang]/`
    - `src/posts/[lang]/`
 3. Update `.eleventy.js` to add a collection for the new language
 4. Create navigation files for the language
-5. Translate static content
+5. Translate static content and navigation labels
 
 ### Modifying the Design
 
@@ -253,6 +333,7 @@ The Eleventy configuration supports:
 2. **Missing Images**: Ensure image paths start with `/assets/images/`
 3. **Language Switching**: Verify language codes match in all configuration files
 4. **Date Formatting**: Use YYYY-MM-DD format for post dates
+5. **Navigation Issues**: Check JavaScript console for errors and verify HTML structure
 
 ### Development Tips
 
@@ -260,14 +341,39 @@ The Eleventy configuration supports:
 - Check the browser console for JavaScript errors
 - Validate your Markdown syntax
 - Test language switching functionality
+- Test navigation with keyboard only
+- Verify accessibility with screen reader software
+
+## Performance
+
+### Optimization Features
+- **Static Generation**: Pre-built HTML for optimal loading times
+- **Minimal JavaScript**: Only essential JavaScript for functionality
+- **CSS Variables**: Efficient styling with custom properties
+- **Progressive Enhancement**: Core functionality without JavaScript
+- **Image Optimization**: Responsive images with proper sizing
+
+### Best Practices
+- **Lazy Loading**: Images load as needed
+- **Caching**: Static assets are cacheable
+- **Minification**: CSS and JavaScript are optimized for production
+- **Web Fonts**: Optimized font loading with font-display: swap
 
 ## Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Test thoroughly
+4. Test thoroughly (including accessibility)
 5. Submit a pull request
+
+### Testing Checklist
+- [ ] Test on mobile and desktop
+- [ ] Verify keyboard navigation
+- [ ] Check with screen reader
+- [ ] Validate HTML and CSS
+- [ ] Test in multiple browsers
+- [ ] Verify multilingual functionality
 
 ## License
 
