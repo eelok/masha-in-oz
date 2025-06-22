@@ -1,3 +1,5 @@
+const isProduction = process.env.ELEVENTY_ENV === "production";
+
 module.exports = {
   title: {
     en: "Masha in the land of Oz",
@@ -9,7 +11,11 @@ module.exports = {
     ru: "Где фондю встречает борщ",
     de: "Wo Fondue auf Borschtsch trifft"
   },
-  url: "https://yourdomain.com",
+  url: isProduction ? "https://wassertim.github.io" : "http://localhost:8080",
+  baseUrl: isProduction ? "/masha-in-oz/" : "/",
+  get fullUrl() {
+    return this.url + this.baseUrl;
+  },
   author: {
     name: "Masha",
     email: "email@example.com"
