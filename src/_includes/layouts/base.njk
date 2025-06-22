@@ -8,39 +8,38 @@
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="{% if page.url == '/' %}website{% else %}article{% endif %}">
-    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:url" content="{{ site.fullUrl }}{{ page.url }}">
     <meta property="og:title" content="{{ title }} | {{ site.title[lang] or site.title.en }}">
     <meta property="og:description" content="{{ description or site.description[lang] }}">
     {% if featured_image %}
-    <meta property="og:image" content="{{ site.url }}{{ featured_image }}">
+    <meta property="og:image" content="{{ site.fullUrl }}{{ featured_image | url }}">
     <meta property="og:image:alt" content="{{ featured_image_alt if featured_image_alt else title }}">
     {% endif %}
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="twitter:url" content="{{ site.fullUrl }}{{ page.url }}">
     <meta property="twitter:title" content="{{ title }} | {{ site.title[lang] or site.title.en }}">
     <meta property="twitter:description" content="{{ description or site.description[lang] }}">
     {% if featured_image %}
-    <meta property="twitter:image" content="{{ site.url }}{{ featured_image }}">
+    <meta property="twitter:image" content="{{ site.fullUrl }}{{ featured_image | url }}">
     <meta property="twitter:image:alt" content="{{ featured_image_alt if featured_image_alt else title }}">
     {% endif %}
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+    <link rel="canonical" href="{{ site.fullUrl }}{{ page.url }}">
     
     <!-- Language alternatives -->
     {% for langCode, langData in site.languages %}
         {% if langCode != lang %}
-        <link rel="alternate" hreflang="{{ langCode }}" href="{{ site.url }}/{{ langCode }}{{ page.url | replace('/en/', '/') | replace('/ru/', '/') | replace('/de/', '/') }}">
+        <link rel="alternate" hreflang="{{ langCode }}" href="{{ site.fullUrl }}/{{ langCode }}{{ page.url | replace('/en/', '/') | replace('/ru/', '/') | replace('/de/', '/') }}">
         {% endif %}
     {% endfor %}
     
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | url }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <base href="{{ site.fullUrl }}">
 </head>
 <body>
     {% include "partials/header.njk" %}
@@ -51,8 +50,8 @@
     
     {% include "partials/footer.njk" %}
     
-    <script src="/assets/js/main.js"></script>
-    <script src="/assets/js/analytics.js"></script>
+    <script src="{{ '/assets/js/main.js' | url }}"></script>
+    <script src="{{ '/assets/js/analytics.js' | url }}"></script>
     
     <!-- Analytics initialization -->
     <script>
