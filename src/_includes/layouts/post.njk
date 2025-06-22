@@ -1,0 +1,43 @@
+---
+layout: layouts/base.njk
+---
+
+<article class="post">
+    <header class="post-header">
+        <h1 class="post-title">{{ title }}</h1>
+        <div class="post-meta">
+            <time datetime="{{ date | htmlDateString }}">
+                {{ date | localizedDate(lang) }}
+            </time>
+            {% if tags %}
+            <div class="post-tags">
+                {% for tag in tags %}
+                    <span class="tag">{{ tag }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </header>
+    
+    <div class="post-content">
+        {{ content | safe }}
+    </div>
+    
+    <footer class="post-footer">
+        <div class="language-switcher">
+            <span class="switcher-label">
+                {% if lang == 'en' %}Read in other languages:{% endif %}
+                {% if lang == 'ru' %}Читать на других языках:{% endif %}
+                {% if lang == 'de' %}In anderen Sprachen lesen:{% endif %}
+            </span>
+            {% for langCode, langData in site.languages %}
+                {% if langCode != lang %}
+                    <a href="/{{ langCode }}{{ page.url | replace('/en/', '/') | replace('/ru/', '/') | replace('/de/', '/') }}" 
+                       class="lang-link">
+                        {{ langData.flag }} {{ langData.name }}
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </footer>
+</article>

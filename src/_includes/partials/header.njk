@@ -1,0 +1,32 @@
+<header class="site-header">
+    <div class="header-container">
+        <div class="site-brand">
+            <a href="/{{ lang }}/" class="site-title">
+                {{ site.title[lang] or site.title.en }}
+            </a>
+        </div>
+        
+        <nav class="main-nav">
+            <ul class="nav-list">
+                {% for item in site.navigation[lang] %}
+                    <li class="nav-item">
+                        <a href="{{ item.url }}" 
+                           class="nav-link {% if page.url == item.url %}active{% endif %}">
+                            {{ item.text }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+        
+        <div class="language-selector">
+            {% for langCode, langData in site.languages %}
+                <a href="/{{ langCode }}/" 
+                   class="lang-switch {% if lang == langCode %}active{% endif %}"
+                   title="{{ langData.name }}">
+                    {{ langData.flag }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</header>

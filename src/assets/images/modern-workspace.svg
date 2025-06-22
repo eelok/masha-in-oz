@@ -1,0 +1,60 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E0F6FF;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="deskGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#A0522D;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#skyGradient)"/>
+  
+  <!-- Desk -->
+  <rect x="0" y="400" width="800" height="200" fill="url(#deskGradient)"/>
+  
+  <!-- Laptop -->
+  <rect x="250" y="320" width="300" height="180" rx="10" fill="#2C3E50"/>
+  <rect x="260" y="330" width="280" height="160" rx="5" fill="#34495E"/>
+  <rect x="270" y="340" width="260" height="140" rx="3" fill="#1ABC9C"/>
+  
+  <!-- Laptop Screen Content -->
+  <rect x="280" y="350" width="240" height="10" fill="#E74C3C"/>
+  <rect x="280" y="370" width="180" height="8" fill="#3498DB"/>
+  <rect x="280" y="385" width="200" height="8" fill="#3498DB"/>
+  <rect x="280" y="400" width="160" height="8" fill="#3498DB"/>
+  
+  <!-- Coffee Cup -->
+  <ellipse cx="150" cy="380" rx="40" ry="15" fill="#8B4513"/>
+  <rect x="110" y="350" width="80" height="30" rx="15" fill="#D2691E"/>
+  <rect x="115" y="355" width="70" height="20" rx="10" fill="#CD853F"/>
+  
+  <!-- Coffee Steam -->
+  <path d="M130 340 Q125 330 130 320" stroke="#E6E6FA" stroke-width="2" fill="none" opacity="0.7"/>
+  <path d="M145 340 Q140 330 145 320" stroke="#E6E6FA" stroke-width="2" fill="none" opacity="0.7"/>
+  <path d="M160 340 Q155 330 160 320" stroke="#E6E6FA" stroke-width="2" fill="none" opacity="0.7"/>
+  
+  <!-- Plant -->
+  <rect x="580" y="360" width="60" height="40" rx="5" fill="#8B4513"/>
+  <ellipse cx="610" cy="340" rx="30" ry="40" fill="#228B22"/>
+  <ellipse cx="590" cy="330" rx="20" ry="30" fill="#32CD32"/>
+  <ellipse cx="630" cy="325" rx="25" ry="35" fill="#90EE90"/>
+  
+  <!-- Books -->
+  <rect x="650" y="360" width="120" height="15" fill="#FF6347"/>
+  <rect x="650" y="375" width="120" height="15" fill="#4169E1"/>
+  <rect x="650" y="390" width="120" height="15" fill="#FFD700"/>
+  
+  <!-- Window -->
+  <rect x="50" y="50" width="200" height="250" rx="10" fill="#87CEEB" opacity="0.3"/>
+  <rect x="60" y="60" width="180" height="230" rx="5" fill="#E0F6FF" opacity="0.5"/>
+  <line x1="150" y1="60" x2="150" y2="290" stroke="#FFFFFF" stroke-width="3"/>
+  <line x1="60" y1="175" x2="240" y2="175" stroke="#FFFFFF" stroke-width="3"/>
+  
+  <!-- Title -->
+  <text x="400" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="#2C3E50">Modern Workspace</text>
+  <text x="400" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#34495E">Productivity in the Digital Age</text>
+</svg>

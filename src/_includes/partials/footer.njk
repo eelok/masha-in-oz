@@ -1,0 +1,11 @@
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-content">
+            <p>&copy; {{ '' | currentYear }} {{ site.author.name }}. 
+               {% if lang == 'en' %}All rights reserved.{% endif %}
+               {% if lang == 'ru' %}Все права защищены.{% endif %}
+               {% if lang == 'de' %}Alle Rechte vorbehalten.{% endif %}
+            </p>
+        </div>
+    </div>
+</footer>
