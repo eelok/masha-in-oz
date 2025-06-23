@@ -11,7 +11,7 @@ module.exports = {
     ru: "Где фондю встречает борщ",
     de: "Wo Fondue auf Borschtsch trifft"
   },
-  url: isProduction ? "https://masha-in-oz.petrius.ch" : "http://localhost:8080",  
+  url: isProduction ? "https://maria.petrius.ch" : "http://localhost:8080",  
   get fullUrl() {
     return this.url + this.baseUrl;
   },
