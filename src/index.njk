@@ -9,7 +9,7 @@ permalink: /
     
     <div class="language-grid">
         {% for langCode, langData in site.languages %}
-            <a href="{{ ('/' + langCode + '/') | url }}" class="language-card">
+            <a href="/{{ langCode }}/" class="language-card">
                 <span class="flag">{{ langData.flag }}</span>
                 <span class="lang-name">{{ langData.name }}</span>
             </a>

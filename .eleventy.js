@@ -1,5 +1,4 @@
 const { DateTime } = require("luxon");
-const isProduction = process.env.ELEVENTY_ENV === "production";
 
 module.exports = function (eleventyConfig) {
   // Copy assets including images
@@ -93,7 +92,6 @@ module.exports = function (eleventyConfig) {
     templateFormats: ["md", "njk", "html", "liquid"],
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
-    pathPrefix: isProduction ? "masha-in-oz" : "/",
     dir: {
       input: "src",
       includes: "_includes",
