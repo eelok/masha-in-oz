@@ -11,6 +11,19 @@ module.exports = function (eleventyConfig) {
     );
   });
 
+  eleventyConfig.addShortcode("youtube", function(id, title = "") {
+    return `
+      <div class="video-responsive">
+        <iframe 
+          src="https://www.youtube.com/embed/${id}" 
+          title="${title}"
+          frameborder="0" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    `;
+});
+
   // Language-specific date filter
   eleventyConfig.addFilter("localizedDate", (dateObj, locale) => {
     return DateTime.fromJSDate(dateObj, { zone: "utc" })
@@ -47,16 +60,20 @@ module.exports = function (eleventyConfig) {
 
   // Collection for each language
   eleventyConfig.addCollection("posts_en", function (collectionApi) {
-    return collectionApi.getFilteredByGlob("src/en/posts/*.md").reverse();
+    return allPosts('en', collectionApi);
   });
 
   eleventyConfig.addCollection("posts_ru", function (collectionApi) {
-    return collectionApi.getFilteredByGlob("src/ru/posts/*.md").reverse();
+    return allPosts('ru', collectionApi);
   });
 
   eleventyConfig.addCollection("posts_de", function (collectionApi) {
-    return collectionApi.getFilteredByGlob("src/de/posts/*.md").reverse();
+    return allPosts('de', collectionApi);
   });
+
+  function allPosts(lang, collectionApi) {
+    return collectionApi.getFilteredByGlob(`src/${lang}/posts/**/*.md`).reverse();
+  }
 
   // Collection for featured posts (posts with featured_image)
   eleventyConfig.addCollection("featuredPosts", function (collectionApi) {
