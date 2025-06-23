@@ -23,7 +23,7 @@ module.exports = {
     // Google Analytics 4 Configuration
     // Replace with your actual GA4 Measurement ID
     googleAnalytics: {
-      measurementId: process.env.GA_MEASUREMENT_ID || "G-XXXXXXXXXX",
+      measurementId: process.env.GA_MEASUREMENT_ID || "G-1R6QBSBNZS",
       // Optional: Different tracking IDs per environment
       development: process.env.GA_DEV_ID || null,
       production: process.env.GA_PROD_ID || null
