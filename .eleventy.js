@@ -22,7 +22,21 @@ module.exports = function (eleventyConfig) {
         </iframe>
       </div>
     `;
-});
+  });
+
+  eleventyConfig.addShortcode("komootembed", function(id, token, title = "") {
+    return `
+      <div class="komootembed-responsive">
+        <iframe 
+          src="https://www.komoot.com/de-de/tour/${id}/embed?share_token=${token}&profile=1" 
+          title="${title}"
+          height="700" 
+          frameborder="0"
+        >
+        </iframe>
+      </div>
+    `;
+  });
 
   // Language-specific date filter
   eleventyConfig.addFilter("localizedDate", (dateObj, locale) => {
