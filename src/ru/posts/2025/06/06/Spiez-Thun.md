@@ -20,4 +20,4 @@ description: "Легкий поход из Шпиец в Тун, наслажд�
 
 {% komootembed "2370328629", "amMh1bdkKiAHwEWoM2pdUNWfVet6HXzMkZcit3gJN1NfQMM36R", "Map" %}
 
-{% youtube "HiJ0fLJPIKM", "Test" %}
+<!-- {% youtube "HiJ0fLJPIKM", "Test" %} -->
