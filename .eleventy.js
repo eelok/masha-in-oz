@@ -4,6 +4,15 @@ module.exports = function (eleventyConfig) {
   // Copy assets including images
   eleventyConfig.addPassthroughCopy("src/assets");
 
+   eleventyConfig.addWatchTarget("src/assets/css/");
+   eleventyConfig.addWatchTarget("src/assets/css/**/*.css");
+
+  eleventyConfig.setServerOptions({
+    liveReload: true,
+    domDiff: true,
+    port: 8080
+  });
+
   // Date filter
   eleventyConfig.addFilter("readableDate", (dateObj) => {
     return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat(
@@ -38,6 +47,32 @@ module.exports = function (eleventyConfig) {
     `;
   });
 
+  // Шорткод для карусели
+  eleventyConfig.addPairedShortcode("carousel", function(content, id = null) {
+    const carouselId = id || `carousel-${Math.random().toString(36).substr(2, 9)}`;
+    
+    return `
+      <div class="photo-carousel" data-carousel id="${carouselId}">
+        <div class="carousel-track">
+          ${content}
+        </div>
+        <button class="carousel-nav carousel-prev">‹</button>
+        <button class="carousel-nav carousel-next">›</button>
+        <div class="carousel-dots"></div>
+      </div>
+    `;
+  });
+
+  eleventyConfig.addShortcode("slide", function(src, alt = '', caption = '') {
+    return `
+      <div class="carousel-slide">
+        <img src="${src}" alt="${alt}" loading="lazy">
+        ${caption ? `<div class="carousel-caption">${caption}</div>` : ''}
+      </div>
+    `;
+  });
+
+  
   // Language-specific date filter
   eleventyConfig.addFilter("localizedDate", (dateObj, locale) => {
     return DateTime.fromJSDate(dateObj, { zone: "utc" })
